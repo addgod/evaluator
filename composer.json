@@ -35,5 +35,15 @@
             "Addgod\\Evaluator\\": "src/"
         }
     },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Addgod\\Evaluator\\EvaluatorServiceProvider"
+            ],
+            "aliases": {
+                "Evaluator": "Addgod\\Evaluator\\Facades\\Evaluator"
+            }
+        }
+    },
     "minimum-stability": "dev"
 }
