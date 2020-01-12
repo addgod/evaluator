@@ -1,8 +1,9 @@
 <?php
 
-use Elepunk\Evaluator\Collection;
+use Addgod\Evaluator\Collection;
+use Tests\TestCase;
 
-class CollectionTest extends \PHPUnit_Framework_TestCase
+class CollectionTest extends TestCase
 {
     /**
      * @test
@@ -10,10 +11,10 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     public function testSetOriginalValueMethod()
     {
         $stub = new Collection([
-            'price' => 100
+            'price' => 100,
         ]);
 
-        $this->assertInstanceOf('\Elepunk\Evaluator\Collection', $stub->setOriginalValue(100));
+        $this->assertInstanceOf('\Addgod\Evaluator\Collection', $stub->setOriginalValue(100));
     }
 
     /**
@@ -22,10 +23,10 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     public function testSetCalculatedValueMethod()
     {
         $stub = new Collection([
-            'price' => 100
+            'price' => 100,
         ]);
 
-        $this->assertInstanceOf('\Elepunk\Evaluator\Collection', $stub->setCalculatedValue(200));
+        $this->assertInstanceOf('\Addgod\Evaluator\Collection', $stub->setCalculatedValue(200));
     }
 
     /**
@@ -34,7 +35,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     public function testGetOriginalMethod()
     {
         $stub = new Collection([
-            'price' => 100
+            'price' => 100,
         ]);
         $stub->setOriginalValue(100);
 
@@ -47,7 +48,7 @@ class CollectionTest extends \PHPUnit_Framework_TestCase
     public function testGetResultMethod()
     {
         $stub = new Collection([
-            'price' => 100
+            'price' => 100,
         ]);
         $stub->setCalculatedValue(200);
 

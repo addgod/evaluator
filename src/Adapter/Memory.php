@@ -1,10 +1,10 @@
-<?php namespace Elepunk\Evaluator\Adapter;
+<?php namespace Addgod\Evaluator\Adapter;
 
-use Illuminate\Support\Fluent;
+use Addgod\Evaluator\Contracts\AdapterInterface;
+use Addgod\Evaluator\Exceptions\MissingExpressionException;
+use Addgod\Evaluator\Traits\ExpressionCheckerTrait;
 use Illuminate\Support\Arr as A;
-use Elepunk\Evaluator\Contracts\AdapterInterface;
-use Elepunk\Evaluator\Traits\ExpressionCheckerTrait;
-use Elepunk\Evaluator\Exceptions\MissingExpressionException;
+use Illuminate\Support\Fluent;
 
 class Memory implements AdapterInterface
 {
@@ -32,7 +32,7 @@ class Memory implements AdapterInterface
      */
     public function load()
     {
-        $this->expressions = $this->memory->get('elepunk_evaluator', []);
+        $this->expressions = $this->memory->get('addgod_evaluator', []);
 
         return $this;
     }
@@ -42,7 +42,7 @@ class Memory implements AdapterInterface
      */
     public function reload()
     {
-        $this->memory->put('elepunk_evaluator', $this->expressions());
+        $this->memory->put('addgod_evaluator', $this->expressions());
     }
 
     /**
@@ -50,7 +50,7 @@ class Memory implements AdapterInterface
      */
     public function add($key, $expression)
     {
-        if (! is_array($expression)) {
+        if (!is_array($expression)) {
             $this->storeExpression($key, $expression);
         } else {
             $expression = new Fluent($expression);
@@ -100,8 +100,9 @@ class Memory implements AdapterInterface
     /**
      * Save the expression
      *
-     * @param  string $key
-     * @param  mixed $expression
+     * @param string $key
+     * @param mixed $expression
+     *
      * @return void
      */
     protected function storeExpression($key, $expression)

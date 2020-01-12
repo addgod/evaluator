@@ -1,16 +1,17 @@
 <?php
 
-use Mockery as m;
+use Addgod\Evaluator\Collection;
+use Addgod\Evaluator\Evaluator;
 use Illuminate\Support\Fluent;
-use Elepunk\Evaluator\Evaluator;
-use Elepunk\Evaluator\Collection;
+use Mockery as m;
+use Tests\TestCase;
 
-class EvaluatorTest extends \PHPUnit_Framework_TestCase
+class EvaluatorTest extends TestCase
 {
     /**
      * @test
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         m::close();
     }
@@ -20,11 +21,12 @@ class EvaluatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetExpressionEngineMethod()
     {
-        list($expression, $adapter) = $this->getMockDependencies();
+        [$expression, $adapter] = $this->getMockDependencies();
 
         $evaluator = new Evaluator($expression, $adapter);
 
-        $this->assertInstanceOf('\Symfony\Component\ExpressionLanguage\ExpressionLanguage', $evaluator->getExpressionEngine());
+        $this->assertInstanceOf('\Symfony\Component\ExpressionLanguage\ExpressionLanguage',
+            $evaluator->getExpressionEngine());
     }
 
     /**
@@ -32,11 +34,11 @@ class EvaluatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testExpressionMethod()
     {
-        list($expression, $adapter) = $this->getMockDependencies();
+        [$expression, $adapter] = $this->getMockDependencies();
 
         $evaluator = new Evaluator($expression, $adapter);
 
-        $this->assertInstanceOf('\Elepunk\Evaluator\Contracts\AdapterInterface', $evaluator->expression());
+        $this->assertInstanceOf('\Addgod\Evaluator\Contracts\AdapterInterface', $evaluator->expression());
     }
 
     /**
@@ -44,13 +46,13 @@ class EvaluatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testEvaluateMethod()
     {
-        list($expression, $adapter) = $this->getMockDependencies();
+        [$expression, $adapter] = $this->getMockDependencies();
 
         $evaluator = new Evaluator($expression, $adapter);
 
         $stub = [
             'foo' => 20,
-            'bar' => 10
+            'bar' => 10,
         ];
 
         $expression->shouldReceive('evaluate')
@@ -72,13 +74,13 @@ class EvaluatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testEvaluateRuleMethod()
     {
-        list($expression, $adapter) = $this->getMockDependencies();
+        [$expression, $adapter] = $this->getMockDependencies();
 
         $evaluator = new Evaluator($expression, $adapter);
 
         $stub = [
             'foo' => 20,
-            'bar' => 10
+            'bar' => 10,
         ];
 
         $adapter->shouldReceive('add')
@@ -112,7 +114,7 @@ class EvaluatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testConditionWithoutRuleMethod()
     {
-        list($expression, $adapter) = $this->getMockDependencies();
+        [$expression, $adapter] = $this->getMockDependencies();
 
         $evaluator = new Evaluator($expression, $adapter);
 
@@ -122,8 +124,8 @@ class EvaluatorTest extends \PHPUnit_Framework_TestCase
         ];
 
         $item = [
-            'name' => 'Foobar',
-            'price' => '100'
+            'name'  => 'Foobar',
+            'price' => '100',
         ];
 
         $expected = new Collection(['name' => 'Foobar', 'price' => '110']);
@@ -160,24 +162,24 @@ class EvaluatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testConditionWithRuleMethod()
     {
-        list($expression, $adapter) = $this->getMockDependencies();
+        [$expression, $adapter] = $this->getMockDependencies();
 
         $evaluator = new Evaluator($expression, $adapter);
 
         $stub = [
             'target' => 'price',
             'action' => '-10%',
-            'rule' => 'price > 50'
+            'rule'   => 'price > 50',
         ];
 
         $item = [
-            'name' => 'Foobar',
-            'price' => '100'
+            'name'  => 'Foobar',
+            'price' => '100',
         ];
 
         $falseItem = [
-            'name' => 'Foo',
-            'price' => '40'
+            'name'  => 'Foo',
+            'price' => '40',
         ];
 
         $expected = new Collection(['name' => 'Foobar', 'price' => '90']);
@@ -226,27 +228,27 @@ class EvaluatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testConditionWithMultiplierMethod()
     {
-        list($expression, $adapter) = $this->getMockDependencies();
+        [$expression, $adapter] = $this->getMockDependencies();
 
         $evaluator = new Evaluator($expression, $adapter);
 
         $stub = [
-            'target' => 'price',
-            'action' => '10%',
-            'rule' => 'price > 50',
-            'multiplier' => 'quantity'
+            'target'     => 'price',
+            'action'     => '10%',
+            'rule'       => 'price > 50',
+            'multiplier' => 'quantity',
         ];
 
         $item = [
-            'name' => 'Foobar',
-            'price' => '100',
-            'quantity' => 2
+            'name'     => 'Foobar',
+            'price'    => '100',
+            'quantity' => 2,
         ];
 
         $expected = [
-            'name' => 'Foobar',
-            'price' => '220',
-            'quantity' => 2
+            'name'     => 'Foobar',
+            'price'    => '220',
+            'quantity' => 2,
         ];
 
         $expected = new Collection(['name' => 'Foobar', 'price' => '220', 'quantity' => 2]);
@@ -293,7 +295,7 @@ class EvaluatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testConditionWithCallbackMethod()
     {
-        list($expression, $adapter) = $this->getMockDependencies();
+        [$expression, $adapter] = $this->getMockDependencies();
 
         $evaluator = new Evaluator($expression, $adapter);
 
@@ -303,8 +305,8 @@ class EvaluatorTest extends \PHPUnit_Framework_TestCase
         ];
 
         $item = [
-            'name' => 'Foobar',
-            'price' => '100'
+            'name'  => 'Foobar',
+            'price' => '100',
         ];
         $expected = new Collection(['name' => 'Foobar', 'price' => '110']);
         $expected->setOriginalValue(100);
@@ -344,7 +346,7 @@ class EvaluatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testConditionFloatMethod()
     {
-        list($expression, $adapter) = $this->getMockDependencies();
+        [$expression, $adapter] = $this->getMockDependencies();
 
         $evaluator = new Evaluator($expression, $adapter);
 
@@ -354,8 +356,8 @@ class EvaluatorTest extends \PHPUnit_Framework_TestCase
         ];
 
         $item = [
-            'name' => 'Foobar',
-            'price' => '100'
+            'name'  => 'Foobar',
+            'price' => '100',
         ];
 
         $expected = new Collection(['name' => 'Foobar', 'price' => '100.1']);
@@ -385,7 +387,7 @@ class EvaluatorTest extends \PHPUnit_Framework_TestCase
     protected function getMockDependencies()
     {
         $expression = m::mock('\Symfony\Component\ExpressionLanguage\ExpressionLanguage');
-        $adapter = m::mock('\Elepunk\Evaluator\Contracts\AdapterInterface');
+        $adapter = m::mock('\Addgod\Evaluator\Contracts\AdapterInterface');
 
         return [$expression, $adapter];
     }

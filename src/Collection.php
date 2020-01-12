@@ -1,4 +1,6 @@
-<?php namespace Elepunk\Evaluator;
+<?php
+
+namespace Addgod\Evaluator;
 
 use Illuminate\Support\Collection as BaseCollection;
 
@@ -34,7 +36,8 @@ class Collection extends BaseCollection
      * Set the calculated value
      *
      * @param string|integer $value
-     * @return \Elepunk\Evaluator\Collection
+     *
+     * @return \Addgod\Evaluator\Collection
      */
     public function setCalculatedValue($value)
     {

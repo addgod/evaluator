@@ -1,8 +1,8 @@
 <?php
 
-use Mockery as m;
+use Addgod\Evaluator\Adapter\Memory;
 use Illuminate\Support\Fluent;
-use Elepunk\Evaluator\Adapter\Memory;
+use Mockery as m;
 
 class MemoryTest extends \PHPUnit_Framework_TestCase
 {
@@ -15,8 +15,8 @@ class MemoryTest extends \PHPUnit_Framework_TestCase
     {
         $stub = [
             'target' => 'foo',
-            'rule' => 'foo > bar',
-            'action' => '10%'
+            'rule'   => 'foo > bar',
+            'action' => '10%',
         ];
 
         $memory = m::mock('\Orchestra\Memory\MemoryManager');
@@ -26,10 +26,10 @@ class MemoryTest extends \PHPUnit_Framework_TestCase
 
         $memory->shouldReceive('get')
             ->once()
-            ->with('elepunk_evaluator', [])
+            ->with('addgod_evaluator', [])
             ->andReturn($stub);
 
-        $this->assertInstanceOf('\Elepunk\Evaluator\Adapter\Memory', $adapter->load());
+        $this->assertInstanceOf('\Addgod\Evaluator\Adapter\Memory', $adapter->load());
         $this->assertEquals($stub, $adapter->expressions());
     }
 
@@ -43,31 +43,31 @@ class MemoryTest extends \PHPUnit_Framework_TestCase
 
         $memory->shouldReceive('put')
             ->once()
-            ->with('elepunk_evaluator', ['foo' => 'foo > bar']);
+            ->with('addgod_evaluator', ['foo' => 'foo > bar']);
 
-        $this->assertInstanceOf('\Elepunk\Evaluator\Adapter\Memory', $adapter->add('foo', 'foo > bar'));
+        $this->assertInstanceOf('\Addgod\Evaluator\Adapter\Memory', $adapter->add('foo', 'foo > bar'));
 
         $stub = [
             'target' => 'foo',
             'action' => '10%',
-            'rule' => 'foo > 100'
+            'rule'   => 'foo > 100',
         ];
 
         $memory->shouldReceive('put')
             ->once()
-            ->with('elepunk_evaluator', ['foo' => 'foo > bar', 'bar' => new Fluent($stub)]);
+            ->with('addgod_evaluator', ['foo' => 'foo > bar', 'bar' => new Fluent($stub)]);
 
-        $this->assertInstanceOf('\Elepunk\Evaluator\Adapter\Memory', $adapter->add('bar', $stub));
+        $this->assertInstanceOf('\Addgod\Evaluator\Adapter\Memory', $adapter->add('bar', $stub));
 
         $memory->shouldReceive('put')
             ->once()
-            ->with('elepunk_evaluator', ['foo' => 'foo < bar', 'bar' => new Fluent($stub)]);
+            ->with('addgod_evaluator', ['foo' => 'foo < bar', 'bar' => new Fluent($stub)]);
 
-        $this->assertInstanceOf('\Elepunk\Evaluator\Adapter\Memory', $adapter->add('foo', 'foo < bar'));
+        $this->assertInstanceOf('\Addgod\Evaluator\Adapter\Memory', $adapter->add('foo', 'foo < bar'));
     }
 
     /**
-     * @expectedException \Elepunk\Evaluator\Exceptions\MissingKeyException
+     * @expectedException \Addgod\Evaluator\Exceptions\MissingKeyException
      */
     public function testAddMethodThrowException()
     {
@@ -84,7 +84,7 @@ class MemoryTest extends \PHPUnit_Framework_TestCase
         $stub = [
             'target' => 'foo',
             'action' => '10%',
-            'rule' => 'foo > 100'
+            'rule'   => 'foo > 100',
         ];
 
         $memory = m::mock('\Orchestra\Memory\MemoryManager');
@@ -92,7 +92,7 @@ class MemoryTest extends \PHPUnit_Framework_TestCase
 
         $memory->shouldReceive('put')
             ->once()
-            ->with('elepunk_evaluator', ['foo' => new Fluent($stub)]);
+            ->with('addgod_evaluator', ['foo' => new Fluent($stub)]);
 
         $adapter->add('foo', $stub);
 
@@ -100,7 +100,7 @@ class MemoryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Elepunk\Evaluator\Exceptions\MissingExpressionException
+     * @expectedException \Addgod\Evaluator\Exceptions\MissingExpressionException
      */
     public function testGetMethodThrowException()
     {
@@ -114,8 +114,8 @@ class MemoryTest extends \PHPUnit_Framework_TestCase
     {
         $stub = [
             'target' => 'foo',
-            'rule' => 'foo > bar',
-            'action' => '10%'
+            'rule'   => 'foo > bar',
+            'action' => '10%',
         ];
 
         $memory = m::mock('\Orchestra\Memory\MemoryManager');
@@ -123,13 +123,13 @@ class MemoryTest extends \PHPUnit_Framework_TestCase
 
         $memory->shouldReceive('put')
             ->once()
-            ->with('elepunk_evaluator', ['foo' => new Fluent($stub)]);
+            ->with('addgod_evaluator', ['foo' => new Fluent($stub)]);
 
         $adapter->add('foo', $stub);
 
         $memory->shouldReceive('put')
             ->once()
-            ->with('elepunk_evaluator', ['foo' => new Fluent($stub), 'bar' => new Fluent($stub)]);
+            ->with('addgod_evaluator', ['foo' => new Fluent($stub), 'bar' => new Fluent($stub)]);
 
         $adapter->add('bar', $stub);
 
@@ -137,9 +137,9 @@ class MemoryTest extends \PHPUnit_Framework_TestCase
 
         $memory->shouldReceive('put')
             ->once()
-            ->with('elepunk_evaluator', ['bar' => new Fluent($stub)]);
+            ->with('addgod_evaluator', ['bar' => new Fluent($stub)]);
 
-        $this->assertInstanceOf('\Elepunk\Evaluator\Adapter\Memory', $adapter->remove('foo'));
+        $this->assertInstanceOf('\Addgod\Evaluator\Adapter\Memory', $adapter->remove('foo'));
         $this->assertEquals(['bar' => new Fluent($stub)], $adapter->expressions());
     }
 }

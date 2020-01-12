@@ -1,6 +1,6 @@
-<?php namespace Elepunk\Evaluator\Contracts;
+<?php namespace Addgod\Evaluator\Contracts;
 
-use \Closure;
+use Closure;
 
 interface EvaluatorInterface
 {
@@ -14,16 +14,17 @@ interface EvaluatorInterface
     /**
      * Get evaluator current adapter instance
      *
-     * @return \Elepunk\Evaluator\Contracts\AdapterInterface
+     * @return \Addgod\Evaluator\Contracts\AdapterInterface
      */
     public function expression();
 
     /**
      * Evaluate an expression using custom rule
      *
-     * @param  string $expression
-     * @param  mixed $item
-     * @param  \Closure $callback
+     * @param string $expression
+     * @param mixed $item
+     * @param \Closure $callback
+     *
      * @return mixed|\Closure
      */
     public function evaluate($expression, $item, Closure $callback = null);
@@ -31,9 +32,10 @@ interface EvaluatorInterface
     /**
      * Evaluate an expression using stored rule
      *
-     * @param  string $expressionKey
-     * @param  mixed $item
-     * @param  \Closure $callback
+     * @param string $expressionKey
+     * @param mixed $item
+     * @param \Closure $callback
+     *
      * @return mixed|\Closure
      */
     public function evaluateRule($expressionKey, $item, Closure $callback = null);
@@ -41,10 +43,11 @@ interface EvaluatorInterface
     /**
      * Apply the condition rules to an item
      *
-     * @param  string $expressionKey
-     * @param  mixex $item
-     * @param  \Closure $callback
-     * @return \Elepunk\Evaluator\Collection | \Closure
+     * @param string $expressionKey
+     * @param mixex $item
+     * @param \Closure $callback
+     *
+     * @return \Addgod\Evaluator\Collection | \Closure
      */
     public function condition($expressionKey, $item, Closure $callback = null);
 }

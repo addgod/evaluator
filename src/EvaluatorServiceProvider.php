@@ -1,4 +1,4 @@
-<?php namespace Elepunk\Evaluator;
+<?php namespace Addgod\Evaluator;
 
 use Illuminate\Foundation\AliasLoader;
 use Orchestra\Support\Providers\ServiceProvider;
@@ -12,9 +12,9 @@ class EvaluatorServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $path = realpath(__DIR__.'/../resources');
+        $path = realpath(__DIR__ . '/../resources');
 
-        $this->addConfigComponent('elepunk/evaluator', 'elepunk/evaluator', $path.'/config');
+        $this->addConfigComponent('addgod/evaluator', 'addgod/evaluator', $path . '/config');
     }
 
     /**
@@ -24,7 +24,7 @@ class EvaluatorServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton('elepunk.evaluator', function ($app) {
+        $this->app->singleton('addgod.evaluator', function ($app) {
             return new EvaluatorManager($app);
         });
 
@@ -40,6 +40,6 @@ class EvaluatorServiceProvider extends ServiceProvider
     {
         $loader = AliasLoader::getInstance();
 
-        $loader->alias('Evaluator', 'Elepunk\Evaluator\Facades\Evaluator');
+        $loader->alias('Evaluator', 'Addgod\Evaluator\Facades\Evaluator');
     }
 }

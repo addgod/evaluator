@@ -1,4 +1,4 @@
-<?php namespace Elepunk\Evaluator\Facades;
+<?php namespace Addgod\Evaluator\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
@@ -11,6 +11,6 @@ class Evaluator extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return 'elepunk.evaluator';
+        return 'addgod.evaluator';
     }
 }

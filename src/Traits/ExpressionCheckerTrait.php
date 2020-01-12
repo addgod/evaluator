@@ -1,7 +1,7 @@
-<?php namespace Elepunk\Evaluator\Traits;
+<?php namespace Addgod\Evaluator\Traits;
 
+use Addgod\Evaluator\Exceptions\MissingKeyException;
 use Illuminate\Support\Fluent;
-use Elepunk\Evaluator\Exceptions\MissingKeyException;
 
 trait ExpressionCheckerTrait
 {
@@ -22,9 +22,10 @@ trait ExpressionCheckerTrait
     /**
      * Vaildate if expression contains the reserve keys
      *
-     * @param  array $expression
+     * @param array $expression
+     *
      * @return boolean
-     * @throws  \Elepunk\Evaluator\Exceptions\MissingKeyException
+     * @throws  \Addgod\Evaluator\Exceptions\MissingKeyException
      */
     protected function verifyExpression(Fluent $expression)
     {

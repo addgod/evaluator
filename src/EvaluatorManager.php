@@ -1,4 +1,4 @@
-<?php namespace Elepunk\Evaluator;
+<?php namespace Addgod\Evaluator;
 
 use Illuminate\Support\Manager;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
@@ -12,24 +12,25 @@ class EvaluatorManager extends Manager
      */
     public function getDefaultDriver()
     {
-        return $this->app['config']->get('elepunk/evaluator::driver', 'memory');
+        return $this->app['config']->get('addgod/evaluator::driver', 'memory');
     }
 
     /**
      * Set the default driver
      *
-     * @param  string $name
+     * @param string $name
+     *
      * @return  void
      */
     public function setDefaultDriver($name)
     {
-        $this->app['config']->set('elepunk/evaluator::driver', $name);
+        $this->app['config']->set('addgod/evaluator::driver', $name);
     }
 
     /**
      * Create memory adapter driver
      *
-     * @return \Elepunk\Evaluator\Evaluator
+     * @return \Addgod\Evaluator\Evaluator
      */
     public function createMemoryDriver()
     {

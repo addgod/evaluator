@@ -1,11 +1,11 @@
-<?php namespace Elepunk\Evaluator\Contracts;
+<?php namespace Addgod\Evaluator\Contracts;
 
 interface AdapterInterface
 {
     /**
      * Load expressions from cache
      *
-     * @return \Elepunk\Evaluator\Contracts\AdapterInterface
+     * @return \Addgod\Evaluator\Contracts\AdapterInterface
      */
     public function load();
 
@@ -20,25 +20,28 @@ interface AdapterInterface
      * Add a new expression for evaluation
      *
      * @param string $key
-     * @param array|string  $expression
-     * @return \Elepunk\Evaluator\Contracts\AdapterInterface
+     * @param array|string $expression
+     *
+     * @return \Addgod\Evaluator\Contracts\AdapterInterface
      */
     public function add($key, $expression);
 
     /**
      * Retrieve an expression
      *
-     * @param  string $key
+     * @param string $key
+     *
      * @return mixed
-     * @throws  \Elepunk\Evaluator\Exceptions\MissingExpressionException
+     * @throws  \Addgod\Evaluator\Exceptions\MissingExpressionException
      */
     public function get($key);
 
     /**
      * Remove an expression
      *
-     * @param  string $key
-     * @return \Elepunk\Evaluator\Contracts\AdapterInterface
+     * @param string $key
+     *
+     * @return \Addgod\Evaluator\Contracts\AdapterInterface
      */
     public function remove($key);
 
