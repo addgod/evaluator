@@ -26,7 +26,7 @@ class Evaluator implements EvaluatorInterface
     /**
      * Construct new evaluator instance
      *
-     * @param \Symfony\Component\ExpressionLanguage\ExpressionLanguge $expression
+     * @param \Symfony\Component\ExpressionLanguage\ExpressionLanguage $expression
      * @param \Addgod\Evaluator\Contracts\AdapterInterface $adapter
      */
     public function __construct(ExpressionLanguage $expression, AdapterInterface $adapter)

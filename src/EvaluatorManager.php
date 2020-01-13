@@ -34,7 +34,7 @@ class EvaluatorManager extends Manager
      */
     public function createMemoryDriver()
     {
-        $adapter = (new Adapter\Memory($this->app['orchestra.memory']))->load();
+        $adapter = (new Adapter\Memory($this->container['orchestra.memory']))->load();
         $expression = new ExpressionLanguage;
 
         return new Evaluator($expression, $adapter);

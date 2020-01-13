@@ -13,26 +13,19 @@ A Laravel package and Orchestra extension for [symfony/expression-language](http
 
 ## Installation
 
-Simpy update the ```composer.json``` file and run ```composer install```.
-
-```json
-"require": {
-	"addgod/evaluator": "1.0.*"
-}
-```
-
-## Quick Installation
-
-```composer require "addgod/evaluator=1.0.*"```
+```composer require addgod/evaluator```
 
 ## Setup
 
-If you are using Orchestra Platform, you can simply enable the extension or add the service provider. This will also load the ```Evaluator``` alias automatically.
-
 ```php
 'providers' => [
-	'Addgod\Evaluator\EvaluatorServiceProvider'
+	Orchestra\Memory\MemoryServiceProvider::class,
 ];
+```
+
+## Run migration
+```shell script
+php artisan migrate
 ```
 
 ## Adapter
